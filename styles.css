@@ -141,3 +141,55 @@ footer .eyebrow{color:#b9a373}
   .footer-cols{grid-template-columns:1fr 1fr}
   .sticky-book{display:none}
 }
+
+/* Responsive sizing and native-control consistency. */
+html{scroll-padding-top:120px}
+button,input{color:inherit}
+button{-webkit-tap-highlight-color:transparent}
+button:not(.btn),input{-webkit-appearance:none;appearance:none}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+main,section,.hero-copy,.booking-card,.book-step,.service-options,.price-list{min-width:0}
+h1,h2,h3,.fact strong,.footer-cols,.summary{overflow-wrap:anywhere}
+.price-heading h2{font-size:clamp(30px,5vw,72px);letter-spacing:.025em;line-height:1.12}
+.price-row{display:grid;grid-template-columns:minmax(0,1fr) max-content;gap:12px 24px}
+.price-row h3{min-width:0;overflow-wrap:anywhere}
+.price-row span{white-space:nowrap}
+.service-option{min-width:0;max-width:100%;grid-template-columns:minmax(0,1fr) max-content;color:var(--ink)}
+.service-option strong{min-width:0;overflow-wrap:anywhere;line-height:1.25}
+.service-option span{white-space:nowrap}
+.service-option small{grid-column:1/-1;min-width:0;overflow-wrap:anywhere}
+.btn{max-width:100%;height:auto;padding-top:12px;padding-bottom:12px;text-align:center;white-space:normal}
+.weekdays,.calendar{grid-template-columns:repeat(7,minmax(0,1fr))}
+.calendar button{min-width:0;padding:0}
+.calendar-head{gap:12px;flex-wrap:wrap}
+.calendar-head>div{display:flex;flex-shrink:0}
+.calendar-head h3{font-size:clamp(23px,5vw,34px)}
+.progress span{flex-shrink:0}
+.progress i{min-width:0;flex:0 1 90px}
+.fact{min-width:0;grid-template-columns:30px minmax(0,1fr)}
+.fact strong{font-size:clamp(26px,3vw,38px)}
+.site-header .menu{top:100%;max-height:calc(100dvh - 105px);overflow-y:auto}
+@media(max-width:899px){
+  body{padding-bottom:calc(110px + env(safe-area-inset-bottom,0px))}
+  .sticky-book{bottom:calc(14px + env(safe-area-inset-bottom,0px));left:16px;right:16px;font-size:18px}
+  .section-pad{padding-left:5.5%;padding-right:5.5%}
+  h1{font-size:clamp(40px,10vw,72px)}
+  h2{font-size:clamp(32px,8vw,60px)}
+  .price-heading h2{font-size:clamp(28px,6.4vw,52px);letter-spacing:.015em}
+  .price-row{grid-template-columns:minmax(0,1fr)}
+  .price-row h3{font-size:clamp(23px,5.6vw,31px);line-height:1.16;letter-spacing:0}
+  .price-row span{font-size:24px}
+  .booking-card{padding:26px 18px;border-radius:26px}
+  .service-option{grid-template-columns:minmax(0,1fr);padding:18px;border-radius:18px;gap:10px}
+  .service-option strong{font-size:clamp(20px,5vw,26px)}
+  .service-option span{font-size:21px}
+  .book-step>h3{font-size:clamp(27px,6vw,34px)}
+  .weekdays,.calendar{gap:3px}
+  .weekdays{font-size:12px;letter-spacing:0}
+  .calendar button{height:38px;font-size:16px}
+  .step-actions .btn{padding-left:18px;padding-right:18px}
+  .hero-photo figcaption{left:16px;right:16px;bottom:18px;width:fit-content;font-size:12px;padding:10px 14px}
+  .protocol-card{padding:24px}
+  .disclaimer{padding-left:0;padding-right:0}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
