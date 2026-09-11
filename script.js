@@ -17,7 +17,9 @@ menuBtn.addEventListener('click', () => {
   menuBtn.setAttribute('aria-expanded', open);
   menu.setAttribute('aria-hidden', !open);
 });
-menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+function closeMenu(){menu.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');menu.setAttribute('aria-hidden','true');}
+menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&menu.classList.contains('open')){closeMenu();menuBtn.focus();}});
 
 const serviceWrap = document.getElementById('service-options');
 function drawServices(){
@@ -75,13 +77,15 @@ document.querySelector('.confirm').onclick=()=>{
   const phone=document.getElementById('phone').value.trim() || 'не указан';
   const s=services[state.service];
   const payload={name,phone,service:s.name,price:s.price,date:`${state.date} сентября 2026`,time:state.time};
-  localStorage.setItem('jafarova-demo-booking',JSON.stringify(payload));
+  let saved=false;
+  try{localStorage.setItem('jafarova-demo-booking',JSON.stringify(payload));saved=true;}catch{}
+  const escapeHTML=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   document.getElementById('summary').innerHTML=`
     <strong>${payload.service}</strong><br>
     ${payload.date} · ${payload.time}<br>
     ${payload.price}<br><br>
-    ${payload.name}<br>${payload.phone}<br><br>
-    <small>Демо-запись сохранена только в этом браузере.</small>`;
+    ${escapeHTML(payload.name)}<br>${escapeHTML(payload.phone)}<br><br>
+    <small>${saved?'Демо-запись сохранена только в этом браузере.':'Демо-запись показана без сохранения. Данные никуда не отправлены.'}</small>`;
   go(4);
 };
 document.querySelector('.restart').onclick=()=>{state={step:1,service:0,date:25,time:'10:00'};drawServices();drawCalendar();drawSlots();go(1)};
